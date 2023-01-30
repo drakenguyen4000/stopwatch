@@ -7,7 +7,8 @@ document.body.innerHTML = `<div id="container"></div>`;
 
 const container = document.getElementById("container");
 container.innerHTML = `<div id="watch"><p class="watch_text">fossil</p><p id="watch_time" class="watch_text" >
-<span id="tMin">0<span><span id="min">0<span>:<span id="tSec">0<span><span id="sec">0<span>:<span id="t_sec">0<span><span id="h_sec">0<span></p><button class="btn btn--start">Start</button><button class="btn btn--stop">Stop</button><button class="btn btn--reset">Reset</button></div>`;
+<span id="tMin">0</span><span id="min">0</span>:<span id="tSec">0</span><span id="sec">0</span>:<span id="t_sec">0</span><span id="h_sec">0</span>
+</p><button class="btn btn--start">Start</button><button class="btn btn--stop">Stop</button><button class="btn btn--reset">Reset</button></div>`;
 container.style.height = "500px";
 container.style.width = "500px";
 container.style.border = "20px solid #afafaf";
@@ -49,18 +50,53 @@ const delay = (time) => {
   return new Promise((resolve) => setTimeout(resolve, time));
 };
 
-//Functions
-document.querySelector(".btn--start").addEventListener("click", async () => {
+const digit = {
+  h_sec: 0,
+  t_sec: 0,
+  tMin: 0,
+}
+
+// const h_secInc = () => {
+//   if (h_sec < 9) {
+//     h_sec += 1;
+//   } else {
+//     h_sec = 0;
+//     t_secInc();
+//   }
+// };
+
+// const t_secInc = () => {
+//   if (t_sec < 9) {
+//     t_sec += 1;
+//   } else {
+//     t_sec = 0;
+//   }
+// };
+
+const increment = (type) => {
+  if (digit[type] < 9) {
+    digit[type] += 1;
+  } else {
+    digit[type] = 0;
+    increment("t_sec");
+  }
+};
+
+const command = async (command) => {
+  const status = command;
   //hundredth of a second counter
-  let h_sec = 0;
-  for (let i = 0; i < 10; i++) {
-    if (h_sec < 9) {
-      h_sec += 1;
-    } else {
-      h_sec = 0;
+  if (status === "start") {
+    for (let i = 0; digit.tMin < 9; i++) {
+      increment("h_sec");
+      document.getElementById("h_sec").innerText = digit.h_sec;
+      document.getElementById("t_sec").innerText = digit.t_sec;
+      await delay(10);
     }
-    document.getElementById("h_sec").innerText = h_sec;
-    await delay(100)
   }
   //The second digit increases to 1 the first digital increases to 10
+};
+
+//Functions
+document.querySelector(".btn--start").addEventListener("click", () => {
+  command("start");
 });
