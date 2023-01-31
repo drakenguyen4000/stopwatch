@@ -50,35 +50,63 @@ const delay = (time) => {
   return new Promise((resolve) => setTimeout(resolve, time));
 };
 
-const digit = {
-  h_sec: 0,
-  t_sec: 0,
-  tMin: 0,
-}
+let h_sec = 0;
+let t_sec = 0;
+let sec = 0;
+let tSec = 0;
+let min = 0;
+let tMin = 0;
 
-// const h_secInc = () => {
-//   if (h_sec < 9) {
-//     h_sec += 1;
-//   } else {
-//     h_sec = 0;
-//     t_secInc();
-//   }
-// };
-
-// const t_secInc = () => {
-//   if (t_sec < 9) {
-//     t_sec += 1;
-//   } else {
-//     t_sec = 0;
-//   }
-// };
-
-const increment = (type) => {
-  if (digit[type] < 9) {
-    digit[type] += 1;
+const h_secInc = () => {
+  if (h_sec < 9) {
+    h_sec += 1;
   } else {
-    digit[type] = 0;
-    increment("t_sec");
+    h_sec = 0;
+    t_secInc();
+  }
+};
+
+const t_secInc = () => {
+  if (t_sec < 9) {
+    t_sec += 1;
+  } else {
+    t_sec = 0;
+    secInc();
+  }
+};
+
+const secInc = () => {
+  if (sec < 9) {
+    sec += 1;
+  } else {
+    sec = 0;
+    tSecInc();
+  }
+};
+
+const tSecInc = () => {
+  if (tSec < 9) {
+    tSec += 1;
+  } else {
+    tSec = 0;
+    minInc();
+  }
+};
+
+const minInc = () => {
+  if (min < 9) {
+    min += 1;
+  } else {
+    min = 0;
+    tMinInc();
+  }
+};
+
+const tMinInc = () => {
+  if (tMin < 9) {
+    tMin += 1;
+  } else {
+    tMin = 0;
   }
 };
 
@@ -86,14 +114,17 @@ const command = async (command) => {
   const status = command;
   //hundredth of a second counter
   if (status === "start") {
-    for (let i = 0; digit.tMin < 9; i++) {
-      increment("h_sec");
-      document.getElementById("h_sec").innerText = digit.h_sec;
-      document.getElementById("t_sec").innerText = digit.t_sec;
-      await delay(10);
+    for (let i = 0; tMin < 9; i++) {
+      h_secInc();
+      document.getElementById("h_sec").innerText = h_sec;
+      document.getElementById("t_sec").innerText = t_sec;
+      document.getElementById("sec").innerText = sec;
+      document.getElementById("tSec").innerText = tSec;
+      document.getElementById("min").innerText = min;
+      document.getElementById("tMin").innerText = tMin;
+      await delay(100);
     }
   }
-  //The second digit increases to 1 the first digital increases to 10
 };
 
 //Functions
