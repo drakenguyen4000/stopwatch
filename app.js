@@ -9,10 +9,11 @@ const container = document.getElementById("container");
 container.innerHTML = `<div id="watch"><p class="watch_text">fossil</p><p id="watch_time" class="watch_text" >
 <span id="tMin">0</span><span id="min">0</span>:<span id="tSec">0</span><span id="sec">0</span>:<span id="t_sec">0</span><span id="h_sec">0</span>
 </p><button class="btn btn--start">Start</button><button class="btn btn--stop">Stop</button><button class="btn btn--reset">Reset</button></div>`;
-container.style.height = "500px";
-container.style.width = "500px";
-container.style.border = "20px solid #afafaf";
-container.style.background = "#030303";
+container.style.height = "550px";
+container.style.width = "550px";
+// container.style.border = "20px solid #afafaf";
+// container.style.background = "#030303";
+container.style.backgroundImage = "url('./metalbackground.jpg')";
 container.style.borderRadius = "30px";
 container.style.display = "grid";
 container.style.textAlign = "center";
@@ -22,6 +23,7 @@ container.style.fontWeight = "600";
 
 //Style watch face
 const watch = document.getElementById("watch");
+watch.style.border = "20px solid #030303";
 watch.style.background = "#2d2c2c";
 watch.style.height = "85%";
 watch.style.width = "85%";
@@ -38,11 +40,20 @@ for (i = 0; i < btns.length; ++i) {
   btns[i].style.padding = "3% 8%";
   btns[i].style.cursor = "pointer";
   btns[i].style.background = "none";
-  btns[i].style.border = "2px solid lightblue";
+  // btns[i].style.border = "2px solid lightblue";
   btns[i].style.margin = "0 1%";
-  btns[i].style.color = "lightblue";
+  // btns[i].style.color = "lightblue";
   btns[i].style.fontSize = "20px";
   btns[i].style.borderRadius = "10px";
+
+  let color = "white";
+  if (i === 0) {
+    color = "#4fc1ff";
+  } else if (i === 1) {
+    color = "red";
+  }
+  btns[i].style.border = `2px solid ${color}`;
+  btns[i].style.color = `${color}`;
 }
 
 //Used to delay speed of loop
@@ -62,6 +73,7 @@ const h_secInc = () => {
     h_sec += 1;
   } else {
     h_sec = 0;
+    console.log("h_sec running");
     t_secInc();
   }
 };
@@ -71,6 +83,7 @@ const t_secInc = () => {
     t_sec += 1;
   } else {
     t_sec = 0;
+    console.log("t_sec running");
     secInc();
   }
 };
@@ -80,6 +93,7 @@ const secInc = () => {
     sec += 1;
   } else {
     sec = 0;
+    console.log("sec running");
     tSecInc();
   }
 };
@@ -112,18 +126,17 @@ const tMinInc = () => {
 
 const command = async (command) => {
   const status = command;
+  console.log(command);
   //hundredth of a second counter
-  if (status === "start") {
-    for (let i = 0; tMin < 9; i++) {
-      h_secInc();
-      document.getElementById("h_sec").innerText = h_sec;
-      document.getElementById("t_sec").innerText = t_sec;
-      document.getElementById("sec").innerText = sec;
-      document.getElementById("tSec").innerText = tSec;
-      document.getElementById("min").innerText = min;
-      document.getElementById("tMin").innerText = tMin;
-      await delay(100);
-    }
+  for (let i = 0; tMin < 9; i++) {
+    h_secInc();
+    document.getElementById("h_sec").innerText = h_sec;
+    document.getElementById("t_sec").innerText = t_sec;
+    document.getElementById("sec").innerText = sec;
+    document.getElementById("tSec").innerText = tSec;
+    document.getElementById("min").innerText = min;
+    document.getElementById("tMin").innerText = tMin;
+    await delay(100);
   }
 };
 
