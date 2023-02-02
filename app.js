@@ -24,7 +24,8 @@ container.style.fontWeight = "600";
 //Style watch face
 const watch = document.getElementById("watch");
 watch.style.border = "20px solid #030303";
-watch.style.background = "#2d2c2c";
+// watch.style.background = "#2d2c2c";
+watch.style.backgroundImage = "linear-gradient(#2d2c2c, lightgrey)";
 watch.style.height = "85%";
 watch.style.width = "85%";
 watch.style.margin = "auto";
@@ -55,6 +56,16 @@ for (i = 0; i < btns.length; ++i) {
   btns[i].style.border = `2px solid ${color}`;
   btns[i].style.color = `${color}`;
 }
+
+btns[0].addEventListener("mouseover", () => {
+  btns[0].style.background = "#4fc1ff";
+  btns[0].style.color = "white";
+});
+
+btns[0].addEventListener("mouseout", () => {
+  btns[0].style.background = "none";
+  btns[0].style.color = "lightblue";
+});
 
 //Used to delay speed of loop
 const delay = (time) => {
@@ -143,4 +154,9 @@ const command = async (command) => {
 //Functions
 document.querySelector(".btn--start").addEventListener("click", () => {
   command("start");
+});
+
+document.querySelector(".btn--stop").addEventListener("click", () => {
+  command("stop");
+  clearTimeout(delay);
 });
