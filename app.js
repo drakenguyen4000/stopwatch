@@ -6,7 +6,7 @@ body.style.fontFamily = "Orbitron, sans-serif";
 document.body.innerHTML = `<div id="container"></div>`;
 
 const container = document.getElementById("container");
-container.innerHTML = `<div id="watch"><p class="watch_text">fossil</p><p id="watch_time" class="watch_text" >
+container.innerHTML = `<div id="watch"><p  id="watch_title" class="watch_text">fossil</p><p id="watch_time" class="watch_text" >
 <span id="tMin">0</span><span id="min">0</span>:<span id="tSec">0</span><span id="sec">0</span>:<span id="t_sec">0</span><span id="h_sec">0</span>
 </p><button class="btn btn--start">Start</button><button class="btn btn--stop">Stop</button><button class="btn btn--reset">Reset</button></div>`;
 container.style.height = "550px";
@@ -17,15 +17,21 @@ container.style.backgroundImage = "url('./metalbackground.jpg')";
 container.style.borderRadius = "30px";
 container.style.display = "grid";
 container.style.textAlign = "center";
-container.style.color = "lightblue";
+// container.style.color = "lightblue";
+container.style.color = "#89CFF0";
 container.style.fontSize = "40px";
 container.style.fontWeight = "600";
+
+//Watch Fossil Title
+document.getElementById("watch_title").style.fontSize = "50px";
+document.getElementById("watch_title").style.color = "orangered";
+document.getElementById("watch_title").style.textTransform = "uppercase";
 
 //Style watch face
 const watch = document.getElementById("watch");
 watch.style.border = "20px solid #030303";
 // watch.style.background = "#2d2c2c";
-watch.style.backgroundImage = "linear-gradient(#2d2c2c, lightgrey)";
+watch.style.backgroundImage = "linear-gradient(45deg, black, #2d2c2c, lightgrey)";
 watch.style.height = "85%";
 watch.style.width = "85%";
 watch.style.margin = "auto";
