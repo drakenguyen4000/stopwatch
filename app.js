@@ -7,7 +7,7 @@ document.body.innerHTML = `<div id="container"></div>`;
 
 const container = document.getElementById("container");
 container.innerHTML = `<div id="watch"><p  id="watch_title" class="watch_text">fossil</p><p id="watch_time" class="watch_text" >
-<span id="tMin">0</span><span id="min">0</span>:<span id="tSec">0</span><span id="sec">0</span>:<span id="t_sec">0</span><span id="h_sec">0</span>
+<span id="tMin">0</span><span id="min">0</span>:<span id="decaSec">0</span><span id="sec">0</span>:<span id="deciSec">0</span><span id="centiSec">0</span>
 </p><button class="btn btn--start">Start</button><button class="btn btn--stop">Stop</button><button class="btn btn--reset">Reset</button></div>`;
 container.style.height = "550px";
 container.style.width = "550px";
@@ -74,29 +74,29 @@ btns[0].addEventListener("mouseout", () => {
   btns[0].style.color = "lightblue";
 });
 
-let h_sec = 0;
-let t_sec = 0;
+let centiSec = 0;
+let deciSec = 0;
 let sec = 0;
-let tSec = 0;
+let decaSec = 0;
 let min = 0;
 let tMin = 0;
 
-const h_secInc = () => {
-  if (h_sec < 9) {
-    h_sec += 1;
+const centiSecInc = () => {
+  if (centiSec < 9) {
+    centiSec += 1;
   } else {
-    h_sec = 0;
-    console.log("h_sec running");
-    t_secInc();
+    centiSec = 0;
+    console.log("centiSec running");
+    deciSecInc();
   }
 };
 
-const t_secInc = () => {
-  if (t_sec < 9) {
-    t_sec += 1;
+const deciSecInc = () => {
+  if (deciSec < 9) {
+    deciSec += 1;
   } else {
-    t_sec = 0;
-    console.log("t_sec running");
+    deciSec = 0;
+    console.log("deciSec running");
     secInc();
   }
 };
@@ -107,15 +107,15 @@ const secInc = () => {
   } else {
     sec = 0;
     console.log("sec running");
-    tSecInc();
+    decaSecInc();
   }
 };
 
-const tSecInc = () => {
-  if (tSec < 9) {
-    tSec += 1;
+const decaSecInc = () => {
+  if (decaSec < 6) {
+    decaSec += 1;
   } else {
-    tSec = 0;
+    decaSec = 0;
     minInc();
   }
 };
@@ -143,17 +143,17 @@ const loop = () => {
   stopTimeout = setTimeout(function () {
     console.log(i);
     i++;
-    if (i < 1000) {
+    if (i < 599999) {
       loop();
-      h_secInc();
-      document.getElementById("h_sec").innerText = h_sec;
-      document.getElementById("t_sec").innerText = t_sec;
+      centiSecInc();
+      document.getElementById("centiSec").innerText = centiSec;
+      document.getElementById("deciSec").innerText = deciSec;
       document.getElementById("sec").innerText = sec;
-      document.getElementById("tSec").innerText = tSec;
+      document.getElementById("decaSec").innerText = decaSec;
       document.getElementById("min").innerText = min;
       document.getElementById("tMin").innerText = tMin;
     }
-  }, 100);
+  }, 10);
 };
 
 //Functions
