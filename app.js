@@ -31,7 +31,8 @@ document.getElementById("watch_title").style.textTransform = "uppercase";
 const watch = document.getElementById("watch");
 watch.style.border = "20px solid #030303";
 // watch.style.background = "#2d2c2c";
-watch.style.backgroundImage = "linear-gradient(45deg, black, #2d2c2c, lightgrey)";
+watch.style.backgroundImage =
+  "linear-gradient(45deg, black, #2d2c2c, lightgrey)";
 watch.style.height = "85%";
 watch.style.width = "85%";
 watch.style.margin = "auto";
@@ -72,11 +73,6 @@ btns[0].addEventListener("mouseout", () => {
   btns[0].style.background = "none";
   btns[0].style.color = "lightblue";
 });
-
-//Used to delay speed of loop
-const delay = (time) => {
-  return new Promise((resolve) => setTimeout(resolve, time));
-};
 
 let h_sec = 0;
 let t_sec = 0;
@@ -141,28 +137,31 @@ const tMinInc = () => {
   }
 };
 
-const command = async (command) => {
-  const status = command;
-  console.log(command);
-  //hundredth of a second counter
-  for (let i = 0; tMin < 9; i++) {
-    h_secInc();
-    document.getElementById("h_sec").innerText = h_sec;
-    document.getElementById("t_sec").innerText = t_sec;
-    document.getElementById("sec").innerText = sec;
-    document.getElementById("tSec").innerText = tSec;
-    document.getElementById("min").innerText = min;
-    document.getElementById("tMin").innerText = tMin;
-    await delay(100);
-  }
+let stopTimeout;
+
+const loop = () => {
+  stopTimeout = setTimeout(function () {
+    console.log(i);
+    i++;
+    if (i < 1000) {
+      loop();
+      h_secInc();
+      document.getElementById("h_sec").innerText = h_sec;
+      document.getElementById("t_sec").innerText = t_sec;
+      document.getElementById("sec").innerText = sec;
+      document.getElementById("tSec").innerText = tSec;
+      document.getElementById("min").innerText = min;
+      document.getElementById("tMin").innerText = tMin;
+    }
+  }, 100);
 };
 
 //Functions
 document.querySelector(".btn--start").addEventListener("click", () => {
-  command("start");
+  loop();
 });
 
 document.querySelector(".btn--stop").addEventListener("click", () => {
-  command("stop");
-  clearTimeout(delay);
+  clearTimeout(stopTimeout);
 });
+
