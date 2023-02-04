@@ -105,6 +105,7 @@ btns[2].addEventListener("mouseout", () => {
   btns[2].style.color = "white";
 });
 
+//Digits control
 let centiSec = 0;
 let deciSec = 0;
 let sec = 0;
@@ -112,6 +113,7 @@ let decaSec = 0;
 let min = 0;
 let tMin = 0;
 
+//Centisecond 1/100 of a second (smallest digit)
 const centiSecInc = () => {
   if (centiSec < 9) {
     centiSec += 1;
@@ -121,6 +123,7 @@ const centiSecInc = () => {
   }
 };
 
+//Decisecond 1/10 of a second
 const deciSecInc = () => {
   if (deciSec < 9) {
     deciSec += 1;
@@ -130,6 +133,7 @@ const deciSecInc = () => {
   }
 };
 
+//Second
 const secInc = () => {
   if (sec < 9) {
     sec += 1;
@@ -139,6 +143,7 @@ const secInc = () => {
   }
 };
 
+//Decasecond 
 const decaSecInc = () => {
   if (decaSec < 6) {
     decaSec += 1;
@@ -148,6 +153,7 @@ const decaSecInc = () => {
   }
 };
 
+//Minute
 const minInc = () => {
   if (min < 9) {
     min += 1;
@@ -157,6 +163,7 @@ const minInc = () => {
   }
 };
 
+//Tens of minute
 const tMinInc = () => {
   if (tMin < 9) {
     tMin += 1;
@@ -165,6 +172,7 @@ const tMinInc = () => {
   }
 };
 
+//Updates Digits on Screen
 const refreshDom = () => {
   document.getElementById("centiSec").innerText = centiSec;
   document.getElementById("deciSec").innerText = deciSec;
@@ -174,7 +182,7 @@ const refreshDom = () => {
   document.getElementById("tMin").innerText = tMin;
 };
 
-let stopTimeout;
+let stopTimeout; //Pause time
 let j = 0;
 
 const loop = () => {
