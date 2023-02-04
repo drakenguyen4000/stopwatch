@@ -38,12 +38,17 @@ watch.style.width = "85%";
 watch.style.margin = "auto";
 watch.style.borderRadius = "20px";
 
+//Watch digits
 const watch_time = document.getElementById("watch_time");
 watch_time.style.fontSize = "70px";
 
-//Style all buttons
-let btns = document.querySelectorAll(".btn"),  i;
+//CentiSeconds Modified size
+document.getElementById("centiSec").style.fontSize = "50px";
 
+//Style all buttons
+let btns = document.querySelectorAll(".btn"),
+  i;
+let color;
 for (i = 0; i < btns.length; ++i) {
   btns[i].style.padding = "3% 8%";
   btns[i].style.cursor = "pointer";
@@ -54,9 +59,9 @@ for (i = 0; i < btns.length; ++i) {
   btns[i].style.fontSize = "20px";
   btns[i].style.borderRadius = "10px";
 
-  let color = "white";
+  color = "white";
   if (i === 0) {
-    color = "#4fc1ff";
+    color = "#4fc1ff"; //blue
   } else if (i === 1) {
     color = "red";
   }
@@ -64,14 +69,40 @@ for (i = 0; i < btns.length; ++i) {
   btns[i].style.color = `${color}`;
 }
 
+//Highlight Start button
 btns[0].addEventListener("mouseover", () => {
   btns[0].style.background = "#4fc1ff";
   btns[0].style.color = "white";
 });
 
+//Remove Highlight Start button
 btns[0].addEventListener("mouseout", () => {
   btns[0].style.background = "none";
   btns[0].style.color = "lightblue";
+});
+
+//Highlight Stop button
+btns[1].addEventListener("mouseover", () => {
+  btns[1].style.background = "#FA8072";
+  btns[1].style.color = "white";
+});
+
+//Remove Highlight Stop button
+btns[1].addEventListener("mouseout", () => {
+  btns[1].style.background = "none";
+  btns[1].style.color = "red";
+});
+
+//Highlight Reset button
+btns[2].addEventListener("mouseover", () => {
+  btns[2].style.background = "lightgrey";
+  btns[2].style.color = "black";
+});
+
+//Remove Highlight Reset button
+btns[2].addEventListener("mouseout", () => {
+  btns[2].style.background = "none";
+  btns[2].style.color = "white";
 });
 
 let centiSec = 0;
@@ -86,7 +117,6 @@ const centiSecInc = () => {
     centiSec += 1;
   } else {
     centiSec = 0;
-    console.log("centiSec running");
     deciSecInc();
   }
 };
@@ -96,7 +126,6 @@ const deciSecInc = () => {
     deciSec += 1;
   } else {
     deciSec = 0;
-    console.log("deciSec running");
     secInc();
   }
 };
@@ -106,7 +135,6 @@ const secInc = () => {
     sec += 1;
   } else {
     sec = 0;
-    console.log("sec running");
     decaSecInc();
   }
 };
