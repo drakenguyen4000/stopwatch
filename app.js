@@ -42,8 +42,8 @@ const watch_time = document.getElementById("watch_time");
 watch_time.style.fontSize = "70px";
 
 //Style all buttons
-let btns = document.querySelectorAll(".btn"),
-  i;
+let btns = document.querySelectorAll(".btn"),  i;
+
 for (i = 0; i < btns.length; ++i) {
   btns[i].style.padding = "3% 8%";
   btns[i].style.cursor = "pointer";
@@ -137,31 +137,50 @@ const tMinInc = () => {
   }
 };
 
+const refreshDom = () => {
+  document.getElementById("centiSec").innerText = centiSec;
+  document.getElementById("deciSec").innerText = deciSec;
+  document.getElementById("sec").innerText = sec;
+  document.getElementById("decaSec").innerText = decaSec;
+  document.getElementById("min").innerText = min;
+  document.getElementById("tMin").innerText = tMin;
+};
+
 let stopTimeout;
+let j = 0;
 
 const loop = () => {
   stopTimeout = setTimeout(function () {
-    console.log(i);
-    i++;
-    if (i < 599999) {
+    console.log(j);
+    j++;
+    if (j < 599999) {
       loop();
       centiSecInc();
-      document.getElementById("centiSec").innerText = centiSec;
-      document.getElementById("deciSec").innerText = deciSec;
-      document.getElementById("sec").innerText = sec;
-      document.getElementById("decaSec").innerText = decaSec;
-      document.getElementById("min").innerText = min;
-      document.getElementById("tMin").innerText = tMin;
+      refreshDom();
     }
   }, 10);
 };
 
 //Functions
+//Starts clock
 document.querySelector(".btn--start").addEventListener("click", () => {
   loop();
 });
 
+//Stops clock
 document.querySelector(".btn--stop").addEventListener("click", () => {
   clearTimeout(stopTimeout);
 });
 
+//Resets clock
+document.querySelector(".btn--reset").addEventListener("click", () => {
+  clearTimeout(stopTimeout);
+  centiSec = 0;
+  deciSec = 0;
+  sec = 0;
+  decaSec = 0;
+  min = 0;
+  tMin = 0;
+  j = 0;
+  refreshDom();
+});
